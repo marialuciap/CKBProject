@@ -129,4 +129,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Define the URL to access uploaded files
 MEDIA_URL = '/media/'
 
-GITHUB_ACCESS_TOKEN = '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'
+GITHUB_ACCESS_TOKEN = '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'
