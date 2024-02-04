@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeKataBattle - Student Interface</title>
+    <link rel="stylesheet" href="{% static 'CKBApp/css/Studentstyle.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Hi {% if student_name %}{{ student_name }}{% else %}Student{% endif %}! Are you ready to learn?</h1>
+        <button id="logout">Logout</button>
+    </header>
+    <div class="container">
+        <div class="left">
+            <section class="tournaments">
+                <h1>Available Tournaments</h1>
+                <br>
+                    <div class="ongoing-tournaments">
+                        <div class="tournament">
+                            <ul>
+                                {% if available_tournaments %}
+                                    {% for tournament in available_tournaments %}
+                                        <h3>{{ tournament.name }}</h3>
+                                        <form action="{% url 'enrolled_tournament' tournament.id %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit">Enroll Now</button>
+                                        </form>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>No tournaments available.</p>
+                                {% endif %}   
+                            </ul>
+                        </div>
+                    </div>
+                    
+                <h1>Enrolled Tournaments</h1>
+                <br>
+                
+                <div class="ongoing-tournaments"> 
+                    <div class="tournament">
+                        <ul>
+                            {% for tournament in user_tournaments_ongoing %}
+                            <h3>{{ tournament.name }}</h3>
+                            <p class="badge-label">Enrolled</p>
+                                <button id="tournamentStatus" onclick="viewTournamentDetails({{ tournament.id }})">View Tournament Details</button>
+                            </form>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <h1>Ended Tournaments</h1>
+                <br>
+                <div class="ongoing-tournaments"> 
+                    <div class="tournament">
+                        <ul>
+                            {% if all_tournaments_expired %}
+                                {% for tournament in all_tournaments_expired %}
+                                    <h3>{{ tournament.name }}</h3>
+                                    {% if tournament in user_tournaments_expired %}
+                                        <p class="badge-label">Enrolled</p>
+                                    {% endif %}
+                                    <button id="viewRanking" onclick="viewRanking({{ tournament.id }})">View Ranking</button>
+                                    </form>
+                                {% endfor %}
+                            {% else %}
+                                <p>No tournaments ended.</p>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+ 
+    
+        <div class="right">
+            <section class="student-info">
+                <h2>Welcome Joe! </h2>
+                <div class="notifications">
+                    <h3>Notifications</h3>
+                    <div class="notification-item">
+                        <p><li>
+                            Battle 1 is starting! Don't lose it. </p>
+                        </li>
+                    </div>
+                    <div class="notification-item">
+                        <p> <li> See the final tournament rank of Tournament 3.</li></p>
+                    </div>
+                    <div class="notification-item">
+                        <p> <li>
+                            Here is the <a href= "NULLA">link</a> to your GitHub repository. Enjoy exploring and happy coding!
+                        </li></p>
+                    </div>
+                </div>
+            <div class="invitations">
+                    <h3>Invitations</h3>
+                    <div class="invitation-item">
+                        {% if invites %}
+                            <ul>
+                            {% for invite in invites %}
+                                <li>
+                                    {% if not invite.accepted %}
+                                        {{ invite.user_who_invite }}  invited you to join the team {{ invite.team }}
+                                        <a href="#" onclick="joinTeam({{ invite.team.id }},{{ invite.team.battle.id }},{{ invite.id }})">Join the team</a> 
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        {% else %} 
+                            <p>There are not new invitations.</p>
+                        {% endif %}      
+                        </p>
+                    </div>
+            </div>
+                <br>
+                <div class="gamification-badges">
+                    <h3>Gamification Badges</h3>
+                    <div class="badge">
+                        <h4>Top Performer</h4>
+                        <p class="badge-label">Obtained</p>
+                        <p>Criteria: Highest total score in Tournament 2</p>
+                    </div>
+                    <!-- Add more badges as needed -->
+                </div>
+                        <div class="search-bar">
+                            <h3>View Student Profile</h3>
+                            <input type="text" placeholder="Enter student name">
+                            <button>View Profile</button>
+                        </div>
+        </div>
+    </div> 
+    <script>
+
+         // Add event listener to the logout button
+         document.getElementById('logout').addEventListener('click', function() {
+            // Perform logout action
+            window.location.href = "{% url 'logoutStudent-page' %}";
+        });
+
+           function viewTournamentDetails(tournamentId) {
+        // Redirect the user to the tournament details page with the correct ID
+        window.location.href = "/enrolledTo/" + tournamentId + "/";
+        }
+        
+            function joinTeam(teamId, battleId, inviteId){
+                fetch(`/joinTeam/${teamId}/${battleId}/${inviteId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.joined) {
+                        // Redirect to battle details page
+                        window.location.href = "/battle-details/" + battleId + "/";
+                    } else {
+                        // Redirect to join battle page
+                        window.location.href = "/join-battle/" + battleId + "/";
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Handle error
+                });
+            }
+
+            function viewRanking(tournamentId) {
+            // Redirect the user to the tournament details page with the correct ID
+            window.location.href = "/rankingTournament/" + tournamentId + "/";
+        }
+
+    </script>   
+    
+</body>
+</html>

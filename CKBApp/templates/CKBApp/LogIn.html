@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeKataBattle</title>
+    <link rel="stylesheet" href="{% static 'CKBApp/css/LogStyle.css' %}">
+</head>
+<body>
+    <form name="loginForm" method="post">
+        <div class="formCo">
+            {% csrf_token %}
+            <h2>CodeKataBattle</h2>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <label for="{{ form.email.id_for_label }}">Insert your mail:</label>
+            {{ form.email }}
+            <label for="{{ form.password.id_for_label }}">Insert your password:</label>
+            {{ form.password }}
+            <input type="hidden" name="type" value="log"/>
+            <input type="submit" value="Sign in"/>
+            <div>
+            <p>Don't you have an account?<a href="{% url 'registration-page' %}"> Sign up</a></p>
+            <p> Are you an Educator? <a href= "{% url 'loginEducator-page' %}"> Sign in as an educator</a></p>
+        </div>
+    </form>
+</body>
+</html>

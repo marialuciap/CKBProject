@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeKataBattle - Team and Student Rankings</title>
+    <link rel="stylesheet" href="{% static 'CKBApp/css/BattleDetailsStyle.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <h1>CodeKataBattle Rankings</h1>
+        <button id="back">Back</button>
+        <button id="home">Home</button>
+        <button id="logout">Logout</button>
+    </header>
+    <div class="battle-score">
+        <h2>Battle Score:</h2>
+        <div class="button-container">
+            <button id="check_score">Check Battle Score</button>
+        </div>
+        <h1>1200</h1>
+        </div>
+        
+        <div class="battle-score">
+            {% if battle.repository_created %}
+                {% if battle.url_repository %}
+                    <a href="{{ battle.url_repository }}" target="_blank">{{ battle.url_repository }}</a>
+                {% endif %}
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="rankings">
+            <h2>Battle Team Ranking</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Team Name</th>
+                        <th>Total Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for team_battle_ranking in team_battle_rankings %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ team_battle_ranking.team.name }}</td>
+                        <td>{{ team_battle_ranking.score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="rankings">
+            <h2>Battle Student Ranking</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Student Name</th>
+                        <th>Team</th>
+                        <th>Individual Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student_battle_ranking, team in enrolled_students.items %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ student_battle_ranking.student.user.name }}</td>
+                        <td>{{ team.name }}</td>
+                        <td>{{ student_battle_ranking.score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+   
+    <script>
+
+        document.getElementById('back').addEventListener('click', function() {
+        // Perform back action
+        window.history.back();
+        });
+
+        document.getElementById('home').addEventListener('click', function() {
+        // Perform home action
+        window.location.href = "{% url 'go-home' %}";
+        });
+
+        document.getElementById('logout').addEventListener('click', function() {
+        // Perform logout action
+        window.location.href = "{% url 'logoutStudent-page' %}";
+        });
+        
+    </script>
+
+</body>
+
+</html>

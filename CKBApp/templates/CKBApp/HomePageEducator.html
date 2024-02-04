@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeKataBattle - Educator Interface</title>
+    <link rel="stylesheet" href="{% static 'CKBApp/css/EducatorStyle.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Hi {% if educator_name %}{{ educator_name }}{% else %}Educator{% endif %}! Start Work</h1>
+        <button id="logout">Logout</button>
+    </header>
+    <div class="container">
+        <div class="left">
+            <section class="tournaments">
+                <h2>Managing Tournaments </h2>
+                <div class="ongoing-tournaments"> 
+                    <div class= "tournament">
+                        <ul>
+                            {% for tournament in user_tournaments %}
+                                <h3>{{ tournament.name }}</h3>
+                                <button id="tournamentStatus" onclick="viewTournamentDetails({{ tournament.id }})">View Tournament Details</button>
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+
+        <div class="right">
+            <section class="create-tournament">
+            <h2>Create Tournament</h2>
+            <button id="create-tournament-button" class="evaluate-work-button">Create Tournament</button>
+            </section>
+              
+            <section class="evaluate-work">
+                <h2>Evaluate Work</h2>
+                    <button>Evaluate</button>
+            </section>
+            <section class="tournaments">
+                <h2>Ongoing Tournaments </h2>
+                <div class="ongoing-tournaments"> 
+                    <div class= "tournament">
+                        <ul>
+                            {% for tournament in other_tournaments %}
+                                <h3>{{ tournament.name }}</h3>
+                                <button id="tournamentStatus" onclick="viewOngoingTournamentDetails({{ tournament.id }})">View Tournament Details</button>
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section class="view-student-profile">
+                <h2>View Student Profile</h2>
+                <!-- Form or input fields to search and view student profiles -->
+                <form>
+                    <div class="search-bar">
+                        <h3>Search Student</h3>
+                        <input type="text" placeholder="Enter student name">
+                        <button>View Profile</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Add event listener to the logout button
+        document.getElementById('logout').addEventListener('click', function() {
+            // Perform logout action
+            window.location.href = "{% url 'logout' %}";
+        });
+
+        document.getElementById('create-tournament-button').addEventListener('click', function() {
+        // Redirect the user to the desired URL
+        window.location.href = "{% url 'create-tournament' %}";
+        });
+
+
+    function viewTournamentDetails(tournamentId) {
+        // Redirect the user to the tournament details page with the correct ID
+        window.location.href = "/tournament-details/" + tournamentId + "/";
+    }
+
+    function viewOngoingTournamentDetails(tournamentId) {
+        // Redirect the user to the tournament details page with the correct ID
+        window.location.href = "/ongoing-tournament-details/" + tournamentId + "/";
+    }
+    
+</script>
+</body>
+</html>

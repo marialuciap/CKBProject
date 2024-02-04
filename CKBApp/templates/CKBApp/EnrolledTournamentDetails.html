@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeKataBattle - Student Interface</title>
+    <link rel="stylesheet" href="{% static 'CKBApp/css/Studentstyle.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Hi {% if student_name %}{{ student_name }}{% else %}Student{% endif %}! Are you ready to learn?</h1>
+        <button id="back">Back</button>
+        <button id="home">Home</button>
+        <button id="logout">Logout</button>
+    </header>
+<div class="container">
+    <div class="right">
+        <section class= "battles">
+            <h3>Battles</h3>
+            <div>
+                <ul>
+                    {% for battle in battles %}
+                        <h3>{{ battle.name }}</h3>
+                        {% if battle in enrolled_battles %}
+                            <p class="badge-label">Joined</p>
+                        <br>
+                        {% endif %}
+                            <button id="battleStatus" onclick="checkEnrollment('{{ battle.id }}')">View Battle Details</button>
+                        
+                        {% if battle in battle_team_created %}
+                            {% if battle.submission_deadline < today %}
+                                <button id="inviteFriends" onclick="inviteFriends('{{ battle.id }}')">Invite your friends</button>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>     
+        </section>
+    </div>
+
+    <div class="left">
+        <section class = "ranking">
+            
+            <div class="battle">
+                <h4>Tournament {% if tournament_name %}{{ tournament_name }}{% else %}x{% endif %} ranking</h4>
+            </div>
+            
+            <div>
+                <button class="view-details-battle" onclick="viewTournamentRanking('{{ tournament.id }}')">View Ranking</button>
+            </div>
+            </section>
+    </div>
+</div>
+</body> 
+<script>
+
+        document.getElementById('back').addEventListener('click', function() {
+            // Perform back action
+            window.history.back();
+        });
+
+        document.getElementById('home').addEventListener('click', function() {
+            // Perform home action
+            window.location.href = "{% url 'go-home' %}";
+        });
+
+    document.getElementById('logout').addEventListener('click', function() {
+        // Perform logout action
+        window.location.href = "{% url 'logoutStudent-page' %}";
+    });
+
+    function inviteFriends(battleId) {
+            // Redirect the user to the tournament details page with the correct ID
+            window.location.href = "/invite-friends/" + battleId + "/";
+        }
+
+
+    function checkEnrollment(battleId) {
+        fetch(`/check-enrollment/${battleId}/`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.is_part_of_team) {
+                // Redirect to battle details page
+                window.location.href = "/battle-details/" + battleId + "/";
+            } else {
+                // Redirect to join battle page
+                window.location.href = "/join-battle/" + battleId + "/";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Handle error
+        });
+    }
+
+    function viewTournamentRanking(tournamentId){
+        window.location.href = "/rankingTournament/" + tournamentId + "/";
+    }
+</script>
+</html>
+                               

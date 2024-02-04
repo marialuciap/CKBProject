@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Details</title>
+    <link rel="stylesheet" href="{% static 'CKBApp/css/EducatorStyle.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Hi {% if educator_name %}{{ educator_name }}{% else %}Educator{% endif %}! Start Work</h1>
+        <button id="back">Back</button>
+        <button id="home">Home</button>
+        <button id="logout">Logout</button>
+    </header>
+    <div class="container">
+        <div class="right">
+            <div class="search-bar">
+                <section>
+                    <h3>{{ tournament.name }} </h3>
+                    <p>{{ tournament.description }} </p>
+                    <br>
+                    <div>
+                        <button id="viewRanking" onclick="viewRanking({{ tournament.id }})">View Ranking</button>
+                    </div>
+                    <br>
+                    <h4>WARNING! This action is irreversible.</h4>
+                    <button id="badge-label" onclick="closeTournament({{ tournament.id }})">Close Tournament</button>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <h4>Permission</h4>
+                        {{ permission_form.as_p }}
+                        <button type="submit" name="permission_form">Grant Permission</button>
+                    </form>
+                    <br>
+                    <div>
+                        <h4>Battles</h4>
+                        <ul>
+                            {% if battles %}
+                            {% for battle in battles %}
+                                <h3>{{ battle.name }}</h3>
+                                <button id="battleStatus" onclick="viewBattleDetails({{ battle.id }})">View Battle Details</button>
+                                
+                                {% if battle.submission_deadline < today %}
+                                    {% if not battle.manually_evaluated %}
+                                        <button id="evaluate" onclick="evaluateBattle({{ battle.id }})">Evaluate</button>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% else %}
+                            <p>No battles found.</p>
+                            {% endif %}
+                        </ul>
+                    </div> 
+                </section>       
+            </div>
+        </div>
+        
+                
+        <div class="left">
+            
+            <section class="create-battle">
+                
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2>Create New Battle</h2>
+                    <label for="id_name">Name:</label>
+                    <input type="text" id="id_name" name="name" required>
+                    <label for="id_minimum_number_of_students">Minimum Number of Students:</label>
+                    <input type="number" id="id_minimum_number_of_students" name="minimum_number_of_students" required>
+                    <label for="id_maximum_number_of_students">Maximum Number of Students:</label>
+                    <input type="number" id="id_maximum_number_of_students" name="maximum_number_of_students" required>
+                    <label for="id_registration_deadline">Registration Deadline:</label>
+                    <input type="date" id="id_registration_deadline" name="registration_deadline" required>
+                    <label for="id_submission_deadline">Submission Deadline:</label>
+                    <input type="date" id="id_submission_deadline" name="submission_deadline" required>
+                    <label for="id_code_kata">Code Kata File:</label>
+                    <input type="file" id="id_code_kata" name="code_kata" required>
+                    <input type="submit" id="createBattle" name="create_battle_form" value="Create Battle">
+                </form>
+            </section> 
+            </div>
+    </div>
+    <script>
+
+        document.getElementById('back').addEventListener('click', function() {
+        // Perform back action
+        window.history.back();
+        });
+
+        document.getElementById('home').addEventListener('click', function() {
+        // Perform home action
+        window.location.href = "{% url 'go-home' %}";
+        });
+
+        document.getElementById('logout').addEventListener('click', function() {
+                // Perform logout action
+                window.location.href = "{% url 'logout' %}";
+        });
+
+        function viewBattleDetails(battleId) {
+            // Redirect the user to the tournament details page with the correct ID
+            window.location.href = "/battle-details/" + battleId + "/";
+        }
+
+        function viewRanking(tournamentId) {
+            // Redirect the user to the tournament details page with the correct ID
+            window.location.href = "/rankingTournament/" + tournamentId + "/";
+        }
+
+        function closeTournament(tournamentId) {
+            // Send a POST request to the close tournament URL
+            fetch(`/close-tournament/${tournamentId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token in the request headers
+                }
+            })
+            .then(response => {
+                // Handle response (e.g., redirect to another page)
+                window.location.href = '/home/educator';  // Redirect to the home page or an appropriate page
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error (e.g., display an error message)
+            });
+        }
+
+        function evaluateBattle(battleId) {
+            // Redirect the user to the evaluate battle page with the correct ID
+            window.location.href = "/evaluate-battle/" + battleId + "/";
+        }
+
+    </script>
+            

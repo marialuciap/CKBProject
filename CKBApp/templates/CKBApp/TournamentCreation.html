@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeKataBattle - Educator Interface</title>
+    <link rel="stylesheet" href="{% static 'CKBApp/css/EducatorStyle.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Hi Educator! Start Creating!</h1>
+        <button id="back">Back</button>
+        <button id="home">Home</button>
+        <button id="logout">Logout</button>
+    </header>
+<div class="container">
+    <section class="creation-tournament">
+        <form method="post" action="{% url 'create-tournament' %}">
+            {% csrf_token %}
+            <h2>Create Tournament</h2>
+            {{ form.as_p }}
+            <input type="submit" id="createTournament" value="Create Tournament">
+        </form>
+        
+            <!--DA LASCIARE?
+            <h2>Create Badge</h2>
+            <label for="authorizeColleagues">Set title:</label>
+            <input type="text" id="authorizeColleagues" name="authorizeColleagues" required>
+            <label for="authorizeColleagues">Set rules:</label>
+            <input type="text" id="authorizeColleagues" name="authorizeColleagues" required>
+            -->
+    </section>
+    <script>
+        
+        document.getElementById('back').addEventListener('click', function() {
+        // Perform back action
+        window.history.back();
+        });
+
+        document.getElementById('home').addEventListener('click', function() {
+        // Perform home action
+        window.location.href = "{% url 'go-home' %}";
+        });
+
+        document.getElementById('logout').addEventListener('click', function() {
+            // Perform logout action
+            window.location.href = "{% url 'logout' %}";
+        });
+</script>
+</body>
+</html>

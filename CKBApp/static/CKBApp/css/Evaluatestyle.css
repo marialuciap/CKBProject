@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right, #8e44ad, #2ecc71);
+    font-family: Verdana, sans-serif;
+}
+
+header {
+    background: #ffffff;
+    padding: 10px;
+    text-align: center;
+    color: #2ecc71;
+    margin-bottom: 20px;
+}
+
+header button#logout,
+button#home,
+button#back {
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 30px;
+    width: 10%;
+    font-size: 14px;
+    margin-top: 5px;
+    transition: background 0.3s ease;
+}
+
+header button#logout:hover,
+button#home:hover,
+button#back:hover {
+    background: #27ae60;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.team-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.team-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.team-list {
+    max-width: 400px; /* Imposta la larghezza massima del contenitore della lista dei team */
+    width: 100%; /* Fai in modo che il contenitore della lista dei team occupi il 100% della larghezza disponibile */
+    margin: 0 auto; /* Centra il contenitore della lista dei team nella pagina */
+}
+
+.evaluate-button {
+    background: #2ecc71;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.evaluate-button:hover {
+    background: #27ae60;
+}
+
+h2 {
+    color: #fff;
+}
+
+

@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right, #8e44ad, #2ecc71);
+    font-family: Verdana, sans-serif;
+}
+
+header {
+    background: #ffffff;
+    padding: 10px;
+    text-align: center;
+    color: #2ecc71;
+    margin-bottom: 5px; /* Ridotto lo spazio iniziale tra l'header e il container */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0; /* Impostato il margine del container a zero */
+}
+
+.container2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    margin: 0; /* Impostato il margine del container a zero */
+}
+
+.tournaments {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+}
+
+/* Styles for the Tournament Battle Details */
+.tournaments h2 {
+    display:flex;
+    color: #2ecc71;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.tournaments p {
+    margin-bottom: 20px;
+}
+
+/* Styles for the Team Registration Form */
+.tournament form {
+    display: flex;
+    flex-direction: column;
+}
+
+.tournament label {
+    margin-top: 10px;
+}
+
+.tournament input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+.form-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-buttons button,
+#team_registration,
+#invitation_button {
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 40px;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.form-buttons button:hover {
+    background: #27ae60;
+}
+
+header button#logout,
+button#home,
+button#back,
+#team_registration 
+#invitation_button {
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 30px;
+    width: 10%;
+    font-size: 14px;
+    margin-top: 5px;
+    transition: background 0.3s ease;
+}
+
+header button#logout:hover,
+button#home:hover,
+button#back:hover,
+#team_registration:hover,
+#invitation_button:hover {
+    background: #27ae60;
+}
+
+.student-name-input {
+    margin-top: 10px;
+}

@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Rank</title>
+    <link rel="stylesheet" href="{% static 'CKBApp/css/ranking.css' %}">
+</head>
+
+<body>
+    <header>
+        <h1>Tournament Rank: {{ tournament.name }}</h1>
+        <button id="back">Back</button>
+        <button id="home">Home</button>
+        <button id="logout">Logout</button>
+    </header>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Student Name</th>
+                <th>Tournament Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tournament_ranking in tournament_rankings %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ tournament_ranking.student.user.name }} {{ tournament_ranking.student.user.surname }}</td>
+                <td>{{ tournament_ranking.score }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+
+        document.getElementById('back').addEventListener('click', function() {
+        // Perform back action
+        window.history.back();
+        });
+
+        document.getElementById('home').addEventListener('click', function() {
+        // Perform home action
+        window.location.href = "{% url 'go-home' %}";
+        });
+
+        document.getElementById('logout').addEventListener('click', function() {
+        // Perform logout action
+        window.location.href = "{% url 'logoutStudent-page' %}";
+        });
+        
+    </script>
+</body>
+
+</html>

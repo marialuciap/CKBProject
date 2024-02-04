@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educator Evaluation</title>
+    <link rel="stylesheet" href="{% static 'CKBApp/css/Evaluatestyle.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Educator Evaluation</h1>
+        <button id="back">Back</button>
+        <button id="home">Home</button>
+        <button id="logout">Logout</button>
+    </header>
+
+    <form id="form" method="post">
+        {% csrf_token %}
+        <ul class="team-list">
+            <h2>Teams Evaluation</h2>
+            {% for team in battle_teams %}
+                <li class="team-item">
+                    <span>{{ team.name }}</span>
+                    <input type="number" name="score_{{ team.id }}" placeholder="Enter score" required min="0" max="100">
+                    <input type="hidden" name="teamid_{{ team.id }}" value="{{ team.id }}">    
+                </li>
+            {% endfor %}
+            <h2>Students Evaluation</h2>
+            {% for student, team in battle_students.items %}
+                <li class="team-item">
+                    <span>{{ student.user.name }} in {{ team.name }}</span>
+                    <input type="number" name="score_{{ student.id }}" placeholder="Enter score" required min="0" max="100"> 
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="team-list">
+        <button type="submit" class="evaluate-button" >Evaluate</button>
+        </div>
+    </form>
+<script>
+    
+        document.getElementById('back').addEventListener('click', function() {
+        // Perform back action
+        window.history.back();
+        });
+
+        document.getElementById('home').addEventListener('click', function() {
+        // Perform home action
+        window.location.href = "{% url 'go-home' %}";
+        });
+
+    document.getElementById('logout').addEventListener('click', function() {
+        // Perform logout action
+        window.location.href = "{% url 'logout' %}";
+    });
+</script>
+
+    
+</body>
+
+</html>

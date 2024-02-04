@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeKataBattle - Tournament Battle</title>
+    <link rel="stylesheet" href="{% static 'CKBApp/css/Battlestyle.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Battle {% if battle_name %}{{ battle_name }}{% else %}x{% endif %}!</h1>
+        <button id="back">Back</button>
+        <button id="home">Home</button>
+        <button id="logout">Logout</button>
+    </header>
+    <div class="container2">
+        <section class="tournaments">
+            <h2>Battle Details</h2>
+            <!--<p>Get ready for an intense coding battle where teams will compete to solve challenging coding problems. The team with the most innovative and efficient solutions will emerge victorious!</p>-->
+            <p><strong>Minimum and Maximum Number of Students per Team: </strong>
+            <br>Each team must have a minimum of {% if battle_min_team_stud %}{{ battle_min_team_stud }}{% else %}?{% endif %} students and a maximum of {% if battle_max_team_stud %}{{ battle_max_team_stud }}{% else %}?{% endif %} students.</p>
+            <br><p>To join a battle you must take parte to a team. Create here your team!</p>
+            <p>If you want to join a friend's team look for your invitation in the notifications area <a href= "home/student/">here</a>.</p>
+
+            
+            <div class="tournament">
+                <form method="post">
+                    {% csrf_token %}
+                    <h2>Team Registration</h2>
+                    {{ team_registration_form.as_p }}
+                    <button type="submit" id="team_registration" name="team_registration_form">Join</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <script>
+
+        document.getElementById('back').addEventListener('click', function() {
+        // Perform back action
+        window.history.back();
+        });
+
+        document.getElementById('home').addEventListener('click', function() {
+        // Perform home action
+        window.location.href = "{% url 'go-home' %}";
+        });
+
+        document.getElementById('logout').addEventListener('click', function() {
+        // Perform logout action
+        window.location.href = "{% url 'logoutStudent-page' %}";
+        });
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right, #8e44ad, #2ecc71);
+    font-family: Verdana, sans-serif;
+}
+
+.container {
+    display: flex;
+}
+
+.left,
+.right {
+    flex: 1;
+}
+
+section {
+    background: #fff;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styles for the Tournaments Section */
+.tournaments h2 {
+    color: #2ecc71;
+    margin-top: 5 px;
+    margin-bottom: 5px;
+}
+
+.new-tournaments,
+.ongoing-tournaments,
+.ended-tournaments,
+.invited-tournaments {
+    margin-bottom: 30px;
+}
+
+.tournament {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+header button#logout,
+button#home,
+button#back {
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 30px;
+    width: 10%;
+    font-size: 14px;
+    margin-top: 5px;
+    transition: background 0.3s ease;
+}
+
+.tournament button,
+.search-bar button,
+.notifications button,
+.gamification-badges button,
+#battleStatus,
+#inviteFriends,
+.search-bar select {
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 40px;
+    width: 100%; /* Button or select takes full width */
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.tournament button:hover,
+.search-bar button:hover,
+.notifications button:hover,
+.gamification-badges button:hover,
+.search-bar select:hover,
+header button#logout:hover,
+#battleStatus:hover,
+#inviteFriends:hover,
+.view-details-battle,
+button#home:hover,
+button#back:hover {
+    background: #27ae60;
+}
+
+/* Styles for the Student Information Section */
+.student-info h2 {
+    color: #2ecc71;
+    margin-bottom: 20px;
+}
+
+.notifications,
+.invitations,
+.gamification-badges,
+.search-bar {
+    margin-bottom: 30px;
+}
+
+.notifications p, 
+.invitations p {
+    margin-bottom: 10px;
+}
+
+.notifications strong {
+    color: #e74c3c;
+}
+
+.badge {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+/* Trophy image near the badges */
+.badge img.trophy {
+    width: 30px; /* Adjust the width as needed */
+    height: 30px; /* Adjust the height as needed */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* Additional styles for the completeness of the code */
+.left h3,
+.right h3 {
+    color: #2ecc71;
+    margin-bottom: 20px;
+}
+
+/* Search Bar Styles */
+.search-bar input {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+.search-bar select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+}
+
+.search-bar ul.invite-list {
+    list-style: none;
+    display: flex;
+}
+
+.search-bar ul.invite-list li {
+    margin-right: 10px;
+    flex: 1;
+}
+
+.badge-label {
+    color: #fff;
+    background: #e74c3c; /* Red background, adjust as needed */
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+h2 + .badge-label {
+    display: inline-block;
+    margin-left: 5px; /* Adjust the margin as needed */
+}
+
+.search-bar input[type="text"] {
+    width: calc(100% - 10px); /* Imposta la stessa lunghezza del bottone View Profile */
+}
+
+
+
+header {
+    background: #ffffff;
+    padding: 10px;
+    text-align: center;
+    color: #2ecc71;
+    margin-bottom: 10px;
+}
+
+.battle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.view-details-battle,
+#battleStatus, 
+#inviteFriends{
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 30px; /* Adjust the height as needed */
+    width: 40%; /* Adjust the width as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+    margin-top: 10px;
+}
+
+.battle h4 {
+    margin-right: 10px;
+    margin: 0; /* Remove default margin for better alignment */
+}

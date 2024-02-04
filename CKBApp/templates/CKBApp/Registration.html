@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="{% static 'CKBApp/css/RegistrationStyle.css' %}">
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <form name="registrationForm" method="post" action="{% url 'registration-page' %}">
+        {% csrf_token %}
+        <div class="formCo">
+            <h2>Registration</h2>
+            {{ form.as_p }}
+            <input type="submit" value="Register">
+        </div>
+    </form>
+
+    <!-- Add AJAX script -->
+    <script>
+        $(document).ready(function () {
+            $('#id_email').on('blur', function () {
+                var email = $(this).val();
+                // Check email existence using AJAX
+                $.ajax({
+                    url: "{% url 'check-email-exists' %}",
+                    method: "GET",
+                    data: { 'email': email },
+                    success: function (data) {
+                        if (data.exists) {
+                            alert('User with this email already exists.');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

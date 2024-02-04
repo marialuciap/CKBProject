@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Details</title>
+    <link rel="stylesheet" href="{% static 'CKBApp/css/EducatorStyle.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Hi {% if educator_name %}{{ educator_name }}{% else %}Educator{% endif %}! Start Work</h1>
+        <button id="back">Back</button>
+        <button id="home">Home</button>
+        <button id="logout">Logout</button>
+    </header>
+    <div class="container">
+        <div class="right">
+               <div class="search-bar">
+                 <section>
+                    <h3>{{ tournament.name }} </h3>
+                    <p>{{ tournament.description }} </p>
+                    <br>
+                    <div>
+                     <button id="viewRanking" onclick="viewRanking({{ tournament.id }})">View Ranking</button>
+                    </div>
+                    <br>
+                    <h4>Battles</h4>
+                    <br>
+                    <div>
+                        <ul>
+                            {% for battle in battles %}
+                                <h3>{{ battle.name }}</h3>
+                                <button id="battleStatus" onclick="viewBattleDetails({{ battle.id }})">View Battle Details</button>
+                            {% endfor %}
+                        </ul>
+                    </div>        
+                </div>
+            </section>
+        </div>
+               
+    </div>
+  
+    <script>
+
+        document.getElementById('back').addEventListener('click', function() {
+        // Perform back action
+        window.history.back();
+        });
+
+        document.getElementById('home').addEventListener('click', function() {
+        // Perform home action
+        window.location.href = "{% url 'go-home' %}";
+        });
+
+
+            document.getElementById('logout').addEventListener('click', function() {
+                // Perform logout action
+                window.location.href = "{% url 'logout' %}";
+            });
+
+            function viewBattleDetails(battleId) {
+        // Redirect the user to the tournament details page with the correct ID
+            window.location.href = "/battle-details/" + battleId + "/";
+        }
+        function viewRanking(tournamentId) {
+            // Redirect the user to the tournament details page with the correct ID
+            window.location.href = "/rankingTournament/" + tournamentId + "/";
+        }
+        
+    </script>
+</body>             

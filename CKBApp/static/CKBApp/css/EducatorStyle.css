@@ -1,0 +1,229 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right, #8e44ad, #2ecc71);
+    font-family: Verdana, sans-serif;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.creation-tournament {
+    width: 70%; /* Adjust the width as needed */
+    margin: 40px auto; /* Center the section horizontally */
+    padding: 25px; /* Add padding for spacing */
+    background-color: #f0f0f0; /* Background color */
+    border-radius: 10px; /* Add rounded corners */
+}
+
+.left, .right {
+    flex: 1;
+    width: 100%;
+}
+
+section {
+    background: #fff;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.student-info h2,
+.left h3,
+.right h3,
+header h1 {
+    color: #2ecc71;
+    margin-bottom: 10px;
+}
+
+ul .errorlist {
+display: hidden;
+
+}
+.new-tournaments,
+.ongoing-tournaments,
+.ended-tournaments,
+.invited-tournaments,
+.notifications,
+.gamification-badges,
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.tournament,
+.badge,
+form {
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+header button#logout,
+button#home,
+button#back {
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 30px;
+    width: 10%;
+    font-size: 14px;
+    margin-top: 5px;
+    transition: background 0.3s ease;
+}
+.battle .view-details-battle,
+.battle button,
+.tournament button,
+.evaluate-work button,
+.search-bar button,
+.notifications button,
+.gamification-badges button,
+.search-bar select,
+.create-tournament button,
+form button {
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 30px;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 5px;
+    transition: background 0.3s ease;
+}
+
+.battle .view-details-battle
+.battle button,
+.tournament button:hover,
+.search-bar button:hover,
+.notifications button:hover,
+.gamification-badges button:hover,
+.search-bar select:hover,
+.evaluate-work button:hover,
+header button#logout:hover,
+.create-tournament button:hover,
+form button:hover,
+button#home:hover,
+button#back:hover {
+    background: #27ae60;
+}
+
+.notifications p {
+    margin-bottom: 5px;
+}
+
+.notifications strong {
+    color: #e74c3c;
+}
+
+.badge img.trophy {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-bar input,
+.search-bar select,
+form input,
+form textarea,
+form select {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+.search-bar ul.invite-list {
+    list-style: none;
+    display: flex;
+}
+
+.search-bar ul.invite-list li {
+    margin-right: 5px;
+    flex: 1;
+}
+
+.badge-label {
+    color: #fff;
+    background: #e74c3c;
+    padding: 3px 6px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+form label {
+    display: block;
+    margin: 5px 0 3px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form select,
+form textarea,
+form input[type="number"] {
+    color: #333;
+    width: 100%;
+    height: 30px;
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.battle .view-details-battle,
+form button {
+    width: 100%;
+    height: 30px;
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+header {
+    background: #ffffff;
+    padding: 10px;
+    text-align: center;
+    color: #2ecc71;
+    margin-bottom: 10px;
+}
+
+#badge-label {
+    color: #fff;
+    background: #e74c3c; /* Red background, adjust as needed */
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
